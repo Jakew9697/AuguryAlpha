@@ -22,8 +22,7 @@
 *.mdb
 *.opendb
 *.VC.db
-# Rider / VS Code / etc.
+#  VS Code
 .idea/
 .vs/
 .vscode/
-# etc…
