@@ -1,4 +1,3 @@
-// filepath: c:\Users\syncg\GameProjects\AuguryAlpha\Assets\Scripts\ClickToMove.cs
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
@@ -118,32 +117,24 @@ public class ClickToMove : MonoBehaviour
         }
     }
 
-    private void UpdateDestinationMarker()
+private void UpdateDestinationMarker()
+{
+    if (currentMarker == null) return;
+
+    if (isMoving)
     {
-        if (currentMarker != null)
-        {
-            markerTimer -= Time.deltaTime;
-
-            // Fade out and destroy
-            if (markerTimer <= 0)
-            {
-                Destroy(currentMarker);
-                currentMarker = null;
-            }
-            else
-            {
-                // Add pulsing effect like OSRS
-                float scale = 1f + 0.2f * Mathf.Sin(Time.time * 5f);
-                currentMarker.transform.localScale = new Vector3(0.5f * scale, 0.05f, 0.5f * scale);
-
-                // Fade out as timer progresses
-                Renderer renderer = currentMarker.GetComponent<Renderer>();
-                Color color = renderer.material.color;
-                color.a = Mathf.Lerp(0, 0.6f, markerTimer / markerDuration);
-                renderer.material.color = color;
-            }
-        }
+        // Pulse while travelling (optional)
+        float scale = 1f + 0.2f * Mathf.Sin(Time.time * 5f);
+        currentMarker.transform.localScale = new Vector3(0.5f * scale, 0.05f, 0.5f * scale);
     }
+    else
+    {
+        // We’ve arrived – destroy the marker instantly
+        Destroy(currentMarker);
+        currentMarker = null;
+    }
+}
+
 
     private System.Collections.IEnumerator InteractWhenReached(IInteractable interactable)
     {

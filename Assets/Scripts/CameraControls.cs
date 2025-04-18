@@ -55,8 +55,8 @@ public class CameraControls : MonoBehaviour
         {
             // Get mouse delta from the new Input System
             Vector2 mouseDelta = Mouse.current.delta.ReadValue();
-            currentYaw += mouseDelta.x * rotationSpeed * Time.deltaTime * 0.1f; // Adjusted sensitivity
-            currentPitch -= mouseDelta.y * rotationSpeed * Time.deltaTime * 0.1f; // Adjusted sensitivity
+            currentYaw += mouseDelta.x * rotationSpeed * Time.deltaTime; // Adjusted sensitivity
+            currentPitch -= mouseDelta.y * rotationSpeed * Time.deltaTime; // Adjusted sensitivity
             currentPitch = Mathf.Clamp(currentPitch, minPitch, maxPitch);
         }
 
